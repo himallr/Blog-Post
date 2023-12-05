@@ -13,6 +13,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get("/",(req,res)=>{
+    res.json("hello");
+})
 app.use("/user",userRoute);
 app.use("/blog",BlogRouter);
 
