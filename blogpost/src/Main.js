@@ -43,6 +43,9 @@ const Main = () => {
     const handlePageChange = (newPage) => {
         setPage(newPage);
     };
+
+    console.log("Blogs pagination" + blogs);
+    console.log("All BLogs" + allblogs);
     
     return (
         <Box width={"100%"} height={"100%"} margin={"auto"} marginTop={2}>
