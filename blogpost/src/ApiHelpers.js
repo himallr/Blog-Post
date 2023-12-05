@@ -44,7 +44,6 @@ export const getBlogs = async () => {
         console.log("Unexpected Error");
     }
     const resDatas = await res.data;
-    console.log(resDatas);
     return resDatas;
 }
 
@@ -56,7 +55,6 @@ export const getPagination = async (p) => {
         console.log("Unexpected Error");
     }
     const resDatas = await res.data;
-    console.log(resDatas);
     return resDatas;
 }
 
