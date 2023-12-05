@@ -6,7 +6,11 @@ import cors from 'cors';
 import BlogRouter from './routes/blog-routes.js';
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ["https://blog-post-frontend.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+}));
 app.use(express.json());
 
 app.use("/user",userRoute);
