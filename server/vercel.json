@@ -4,8 +4,6 @@
     { "src":"*.js", "use":"@vercel/node" }
   ],
   "routes": [
-    { "src": "/user/get", "dest": "/blogpost/src/User.js" },
-    { "src": "/blog/get", "dest": "/blogpost/src/Main.js" },
     {
     "src":"/(.*)",
     "dest": "/"
