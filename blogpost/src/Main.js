@@ -12,7 +12,9 @@ const Main = () => {
 
     const onResReceived = (res) => {
         setBlogs(res.blogs);
-        console.log(res.blogs);
+        res.blogs.forEach((blog) => {
+          console.log(JSON.stringify(blog));
+        });
     };
     useEffect(() => {
         getPagination(pages)
