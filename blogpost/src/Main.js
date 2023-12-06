@@ -45,7 +45,7 @@ const Main = () => {
         setPage(newPage);
     };
 
-    console.log("Blogs pagination" + blogs);
+    console.log(`Blogs pagination: ${JSON.stringify(blogs)}`);
     console.log("All BLogs" + allblogs);
     
     return (
