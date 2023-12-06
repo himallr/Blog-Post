@@ -6,15 +6,12 @@ import Blogs from './Blogs';
 const Main = () => {
 
     const [pages, setPage] = useState(1);
-    const [blogs, setBlogs] = useState([])
-    const [allblogs, setAllBlogs] = useState([])
+    const [blogs, setBlogs] = useState()
+    const [allblogs, setAllBlogs] = useState()
     const totalPages = 4;
 
     const onResReceived = (res) => {
         setBlogs(res.blogs);
-        res.blogs.forEach((blog) => {
-          console.log(JSON.stringify(blog));
-        });
     };
     useEffect(() => {
         getPagination(pages)
