@@ -19,7 +19,7 @@ app.get("/",(req,res)=>{
 app.use("/user",userRoute);
 app.use("/blog",BlogRouter);
 
-mongoose.connect(`mongodb+srv://himallr2003:${process.env.PASSWORD}@cluster0.tdcr3z4.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect('mongodb+srv://himallr2003:51pXlgpE4q9oZhIc@cluster0.tdcr3z4.mongodb.net/test?retryWrites=true&w=majority')
     .then(() => {
         app.listen(3001, () => {
             console.log("Connected to mongodb and Listening to port 3001");
