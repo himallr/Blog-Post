@@ -12,7 +12,7 @@ const Main = () => {
 
     const onResReceived = (res) => {
         setBlogs(res.blogs);
-        console.log(res);
+        console.log(res.blogs);
     };
     useEffect(() => {
         getPagination(pages)
