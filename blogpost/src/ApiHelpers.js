@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+axios.defaults.withCredentials = true;
+
 export const sendUsers = async (datas, signup) => {
     console.log(signup);
     const res = await axios.post(`https://blog-post-steel.vercel.app/user/${!signup ? "addUser" : "login"}`, {
