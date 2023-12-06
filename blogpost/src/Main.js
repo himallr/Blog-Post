@@ -6,12 +6,12 @@ import Blogs from './Blogs';
 const Main = () => {
 
     const [pages, setPage] = useState(1);
-    const [blogs, setBlogs] = useState()
-    const [allblogs, setAllBlogs] = useState()
+    const [blog, setBlogs] = useState()
+    const [allblogs, setAllBlogs] = useState([])
     const totalPages = 4;
 
     const onResReceived = (res) => {
-        setBlogs(res.blogs);
+        setBlogs(res);
     };
     useEffect(() => {
         getPagination(pages)
@@ -44,7 +44,7 @@ const Main = () => {
         setPage(newPage);
     };
 
-    console.log(`Blogs pagination: ${JSON.stringify(blogs)}`);
+    console.log(`Blogs pagination:" + blog);
     console.log("All BLogs" + allblogs);
     
     return (
@@ -59,7 +59,7 @@ const Main = () => {
 
                             <Box margin={"auto"} width={"100%"} flexWrap={"wrap"} style={{ justifyContent: "center" }}>
                                 {
-                                    blogs & blogs.map((e, index) =>
+                                    blog.blogs & blog.blogs.map((e, index) =>
                                         <Blogs id={e._id} key={index} isUser={localStorage.getItem("UserID") === e.user._id} title={e.title} description={e.description} date={e.date} image={e.image} user={e.user.name} />
                                     )
                                 }
