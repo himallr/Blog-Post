@@ -44,7 +44,7 @@ const Main = () => {
         setPage(newPage);
     };
 
-    console.log(`Blogs pagination:" + blog);
+    console.log("Blogs pagination:" + blog);
     console.log("All BLogs" + allblogs);
     
     return (
