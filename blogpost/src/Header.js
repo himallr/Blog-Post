@@ -21,7 +21,7 @@ const Header = () => {
                 <span className="navbar-toggler-icon color-white"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="form-inline navbar-nav mr-auto">
+                <ul className="form-inline navbar-nav ml-auto">
                     {isUserLoggedIn &&
                         <ul className='navbar-nav mr-auto'>
                             <li className="nav-item mx-2 my-2">
