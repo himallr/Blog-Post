@@ -65,6 +65,7 @@ export const getblogsById = async (id) => {
       .get(`http://localhost:3001/blog/getbyid/${id}`)
       .catch((err) => console.log(err));
     const resData = await res.data;
+    console.log(resData);
     return resData;
   };
 
