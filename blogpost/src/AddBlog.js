@@ -6,10 +6,11 @@ import { addBlogs } from "./ApiHelpers";
 //const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const AddBlog = () => {
   const navigate = useNavigate();
+  const user= localStorage.getItem("UserID");
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
-    image: "",
+    image: null,
     date: ""
   });
   const handleChange = (e) => {
@@ -18,10 +19,28 @@ const AddBlog = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const convertToB64 = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+        var reader = new FileReader();
+
+        reader.onload = () => {
+            setInputs((prevInputs) => ({
+                ...prevInputs,
+                image: reader.result,
+            }));
+        };
+
+        reader.readAsDataURL(file);
+    }
+};
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    addBlogs(inputs)
+    addBlogs(inputs,user)
       .then((data) => console.log(data))
       .then(() => navigate("/"));
   };
@@ -77,7 +96,7 @@ const AddBlog = () => {
                         <h6 className="mb-0">Upload image</h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <input className="form-control form-control-lg" name="image" onChange={handleChange} value={inputs.image}></input>
+                        <input className="form-control form-control-lg" name="image" onChange={convertToB64} type="file"></input>
                       </div>
                     </div>
                     <hr className="mx-n3"></hr>
