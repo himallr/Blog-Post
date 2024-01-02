@@ -4,8 +4,11 @@ import dotenv from 'dotenv';
 import userRoute from './routes/user-routes.js';
 import cors from 'cors';
 import BlogRouter from './routes/blog-routes.js';
+import bodyParser from 'body-parser';
+
 dotenv.config();
 const app = express();
+app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors({
     origin: ["https://blog-post-frontend-psi.vercel.app"],
     methods: ["POST", "GET"],
