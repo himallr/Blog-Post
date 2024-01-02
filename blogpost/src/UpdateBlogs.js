@@ -7,33 +7,56 @@ import { getblogsById, updateBlogs } from "./ApiHelpers";
 
 const UpdateBlogs = () => {
     const navigate = useNavigate();
-    const [blog, setBlog] = useState();
+    const [blog, setBlog] = useState({
+        title: "",
+        description: "",
+        image: '',
+    });
     const id = useParams().id;
     console.log(id);
-    const [inputs, setInputs] = useState({});
-    const handleChange = (e) => {
-        setInputs((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value,
-        }));
-        console.log(inputs);
-    };
+
     useEffect(() => {
-        getblogsById(id).then((data) => {
-            setBlog(data.blog);
-            console.log(data.blog);
-            // setInputs({
-            //     title: data.blog.title,
-            //     description: data.blog.description,
-            //     image: data.blog.image,
-            // });
-        });
+        const fetchBlogDetails = async () => {
+            try {
+                const blogDetails = await getblogsById(id);
+                setBlog(blogDetails.blogs);
+            } catch (error) {
+                console.error('Error fetching book details:', error);
+            }
+        };
+
+        fetchBlogDetails();
     }, [id]);
     console.log(blog);
+
+    const handleChange = (e) => {
+        setBlog({
+            ...blog,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const convertToB64 = (e) => {
+        const file = e.target.files[0];
+    
+        if (file) {
+            var reader = new FileReader();
+    
+            reader.onload = () => {
+                setBlog((prevInputs) => ({
+                    ...prevInputs,
+                    image: reader.result,
+                }));
+            };
+    
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(inputs);
-        updateBlogs(inputs,id)
+        console.log(blog);
+        updateBlogs(blog, id)
             .then((data) => console.log(data))
             .then(() => navigate("/UserBlogs"));
     };
@@ -53,7 +76,7 @@ const UpdateBlogs = () => {
                                                 <h6 className="mb-0">Title</h6>
                                             </div>
                                             <div className="col-md-9 pe-5">
-                                                <input type="text" name="title" onChange={handleChange} value={inputs.title} className="form-control form-control-lg" />
+                                                <input type="text" name="title" value={blog.title} onChange={handleChange} className="form-control form-control-lg" />
                                             </div>
                                         </div>
                                         <div className="row align-items-center py-3">
@@ -61,28 +84,15 @@ const UpdateBlogs = () => {
                                                 <h6 className="mb-0">Description</h6>
                                             </div>
                                             <div className="col-md-9 pe-5">
-                                                <input type="text" name="description" className="form-control form-control-lg" onChange={handleChange} value={inputs.description} />
+                                                <input type="text" name="description" className="form-control form-control-lg" value={blog.description} onChange={handleChange} />
                                             </div>
                                         </div>
-                                        {/* <div className="row align-items-center py-3">
-                      <div className="col-md-3 ps-5">
-
-                        <h6 className="mb-0">Upload image</h6>
-
-                      </div>
-                      <div className="col-md-9 pe-5">
-
-                        <input className="form-control form-control-lg" name="image" id="formFileLg" type="file" onChange={handleChange} value={inputs.image} />
-                        <div className="small text-muted mt-2">Upload the image. Max file size 50 MB</div>
-
-                      </div>
-                    </div> */}
                                         <div className="row align-items-center py-3">
                                             <div className="col-md-3 ps-5">
                                                 <h6 className="mb-0">Upload image</h6>
                                             </div>
                                             <div className="col-md-9 pe-5">
-                                                <input className="form-control form-control-lg" name="image" onChange={handleChange} value={inputs.image}></input>
+                                                <input className="form-control form-control-lg" type="file" name="image" onChange={convertToB64}></input>
                                             </div>
                                         </div>
                                         <hr className="mx-n3"></hr>
