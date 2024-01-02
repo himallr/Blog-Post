@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors({
     origin: ["https://blog-post-frontend-psi.vercel.app"],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET","PUT","DELETE"],
     credentials: true
 }));
 app.use(express.json());
