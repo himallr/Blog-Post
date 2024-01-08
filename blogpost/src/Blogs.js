@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteBlogs, getBlogs, updateBlogs } from './ApiHelpers';
 
-const Blogs = ({ title, date, description, image, id, isUser, user }) => {
+const Blogs = ({ title, date, description, place, image, id, isUser, user }) => {
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([])
     const onResReceived = (res) => {
@@ -54,20 +54,24 @@ const Blogs = ({ title, date, description, image, id, isUser, user }) => {
                         }
                     </div>
                 </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    <span className='text-dark h2'>{title}</span>
+                </Typography>
+                <hr></hr>
                 <CardMedia
                     sx={{ height: 400 }}
                     image={image}
                     title={title}
                 />
-                
+
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Place : <span className='text-dark'>{title}</span>
+                    Place : <span className='text-dark'>{place}</span>
                 </Typography>
                 <Typography variant="body2">
                     {description}
                     <br />
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} style={{display: "flex" , flexDirection: "column" ,alignItems:"flex-end"}} color="text.secondary">
+                <Typography sx={{ mb: 1.5 }} style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }} color="text.secondary">
                     {new Date(date).toDateString()}
                 </Typography>
             </CardContent>

@@ -11,12 +11,19 @@ const User = () => {
     const data = (datas) => {
         sendUsers(datas.inputs, datas.signup)
             .then((data) => {
-                console.log(data);
-                dispatch(authActions.login())
-                localStorage.setItem("UserID", data.id);
-                navigate("/");
+                if (!datas.signup) {
+                    console.log("not sigup");
+                    window.location.reload();
+                    navigate("/User");
+                }
+                else {
+                    console.log(data);
+                    dispatch(authActions.login())
+                    localStorage.setItem("UserID", data.id);
+                    navigate("/");
+                }
             })
-            .catch((e) => console.log(e))
+            .catch((e) => alert("Incorrect Email or Password!"))
     }
     return (
         <div className='container'>

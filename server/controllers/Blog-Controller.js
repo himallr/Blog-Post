@@ -7,7 +7,6 @@ export const display = async (req, res, next) => {
 
     try {
         blogs = await Blog.find().populate("user");
-        //blogs = blogs.save();
     }
     catch (e) {
         console.log(e);
@@ -19,7 +18,7 @@ export const display = async (req, res, next) => {
 }
 
 export const addBlog = async (req, res, next) => {
-    const { title, image, description, date, user } = req.body;
+    const { title, image, description, place, date, user } = req.body;
 
     let existinguser;
     try {
@@ -36,7 +35,7 @@ export const addBlog = async (req, res, next) => {
     if (!title || !image || !description || !date) {
         return res.status(200).json({ message: "Error" });
     }
-    blogs = new Blog({ title, image, description, date: new Date(`${date}`), user: existinguser });
+    blogs = new Blog({ title, image, description, place, date: new Date(`${date}`), user: existinguser });
     try {
         const session = await mongoose.startSession();
         session.startTransaction();
@@ -56,7 +55,7 @@ export const addBlog = async (req, res, next) => {
 }
 
 export const updateBlog = async (req, res, next) => {
-    const { title, image, description, date, user } = req.body;
+    const { title, image, description, place } = req.body;
     const id = req.params.id;
     console.log(id);
     let blogs;
@@ -64,7 +63,7 @@ export const updateBlog = async (req, res, next) => {
         return res.status(200).json({ message: "Wrong id" });
     }
     try {
-        blogs = await Blog.findByIdAndUpdate(id, { title, image, description });
+        blogs = await Blog.findByIdAndUpdate(id, { title, image, description, place });
         blogs = blogs.save();
     }
     catch (e) {
@@ -82,8 +81,11 @@ export const deleteBlog = async (req, res, next) => {
     let blog;
     try {
         blog = await Blog.findByIdAndRemove(id).populate("user");
-        console.log(blog);
-        await blog.user.blogs.pull(blog);
+        // const session = await mongoose.startSession();
+        // session.startTransaction();
+        // await blog.user.blogs.pull(blog);
+        // await blog.user.save({ session });
+        // await session.commitTransaction();
     }
     catch (e) {
         console.log(e);

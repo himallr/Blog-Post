@@ -8,8 +8,10 @@ export const sendUsers = async (datas, signup) => {
         email: datas.email,
         password: datas.password
     })
-        .catch((e) => { console.log(e); })
-    console.log(res.status);
+        .catch((e) => {
+            console.log("Incorrect Password");
+        })
+    console.log(res);
     if (res.status !== 200) {
         console.log("Unexpected Error");
     }
@@ -18,17 +20,17 @@ export const sendUsers = async (datas, signup) => {
     return resDatas;
 }
 
-export const addBlogs = async (datas) => {
-    console.log(datas);
+export const addBlogs = async (datas, user) => {
     const res = await axios.post("http://localhost:3001/blog/addblogs", {
         title: datas.title,
         description: datas.description,
+        place: datas.place,
         image: datas.image,
         date: datas.date,
-        user: localStorage.getItem("UserID"),
+        user: user,
     })
         .catch((err) => console.log(err));
-    console.log(res.status);
+    console.log(res.data);
     if (res.status !== 200) {
         console.log("Unexpected Error");
     }
@@ -39,7 +41,7 @@ export const addBlogs = async (datas) => {
 export const getBlogs = async () => {
     const res = await axios.get("http://localhost:3001/blog/get")
         .catch((e) => console.log(e))
-    
+
     if (res.status !== 200) {
         console.log("Unexpected Error");
     }
@@ -51,7 +53,7 @@ export const getBlogs = async () => {
 export const getPagination = async (p) => {
     const res = await axios.get(`http://localhost:3001/blog/getbyPagination?p=${p}`)
         .catch((e) => console.log(e))
-    
+
     if (res.status !== 200) {
         console.log("Unexpected Error");
     }
@@ -62,12 +64,12 @@ export const getPagination = async (p) => {
 
 export const getblogsById = async (id) => {
     const res = await axios
-      .get(`http://localhost:3001/blog/getbyid/${id}`)
-      .catch((err) => console.log(err));
+        .get(`http://localhost:3001/blog/getbyid/${id}`)
+        .catch((err) => console.log(err));
     const resData = await res.data;
     console.log(resData);
     return resData;
-  };
+};
 
 export const deleteBlogs = async (id) => {
     const res = await axios.delete(`http://localhost:3001/blog/deleteBlogs/${id}`)
@@ -80,11 +82,12 @@ export const deleteBlogs = async (id) => {
     return resDatas;
 }
 
-export const updateBlogs = async (datas,id) => {
+export const updateBlogs = async (datas, id) => {
     console.log(id);
     const res = await axios.put(`http://localhost:3001/blog/updateBlogs/${id}`, {
         title: datas.title,
         description: datas.description,
+        place: datas.place,
         image: datas.image,
     })
         .catch((err) => console.log(err));
@@ -101,7 +104,7 @@ export const sendRequest = async (id) => {
         .get(`http://localhost:3001/blog/getUserBlog/${id}`)
         .catch((err) => console.log(err));
 
-        console.log(res.data);
+    console.log(res.data);
     const data = await res.data;
     return data;
 };

@@ -8,7 +8,7 @@ const Main = () => {
     const [pages, setPage] = useState(1);
     const [blog, setBlogs] = useState()
     const [allblogs, setAllBlogs] = useState([])
-    const totalPages = 4;
+    const totalPages = allblogs && parseInt(Math.ceil(allblogs.length / 3));
 
     const onResReceived = (res) => {
         setBlogs(res);
@@ -50,7 +50,7 @@ const Main = () => {
     return (
         <Box width={"100%"} height={"100%"} margin={"auto"} marginTop={2}>
             <Box width={"auto"} padding={5}>
-                <Typography variant="h4" textAlign={"center"}>Blogs</Typography>
+                <Typography variant="h3" textAlign={"center"}>All Blogs</Typography>
             </Box>
             <div>
                 <div className="container-fluid  ">
@@ -59,8 +59,7 @@ const Main = () => {
 
                             <Box margin={"auto"} width={"100%"} flexWrap={"wrap"} style={{ justifyContent: "center" }}>
                                 {
-                                    blog && 
-                                    blog.blogs && blog.blogs.map((e, index) =>
+                                    blog && blog.blogs && blog.blogs.map((e, index) =>
                                         <Blogs id={e._id} key={index} isUser={localStorage.getItem("UserID") === e.user._id} title={e.title} description={e.description} date={e.date} image={e.image} user={e.user.name} />
                                     )
                                 }

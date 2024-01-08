@@ -6,10 +6,12 @@ import { addBlogs } from "./ApiHelpers";
 //const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const AddBlog = () => {
   const navigate = useNavigate();
+  const user = localStorage.getItem("UserID");
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
-    image: "",
+    place: "",
+    image: null,
     date: ""
   });
   const handleChange = (e) => {
@@ -18,10 +20,28 @@ const AddBlog = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const convertToB64 = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+
+      reader.onload = () => {
+        setInputs((prevInputs) => ({
+          ...prevInputs,
+          image: reader.result,
+        }));
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    addBlogs(inputs)
+    addBlogs(inputs, user)
       .then((data) => console.log(data))
       .then(() => navigate("/"));
   };
@@ -51,33 +71,28 @@ const AddBlog = () => {
                         <input type="text" name="description" className="form-control form-control-lg" onChange={handleChange} value={inputs.description} />
                       </div>
                     </div>
+                    <div className="row align-items-center pt-4 pb-3">
+                      <div className="col-md-3 ps-5">
+                        <h6 className="mb-0">Location</h6>
+                      </div>
+                      <div className="col-md-9 pe-5">
+                        <input type="text" name="place" onChange={handleChange} value={inputs.place} className="form-control form-control-lg" />
+                      </div>
+                    </div>
                     <div className="row align-items-center py-3">
                       <div className="col-md-3 ps-5">
                         <h6 className="mb-0">Date</h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <input className="form-control form-control-lg" type="text" name="date" onChange={handleChange} value={inputs.date}></input>
+                        <input className="form-control form-control-lg" type="date" name="date" onChange={handleChange} value={inputs.date}></input>
                       </div>
                     </div>
-                    {/* <div className="row align-items-center py-3">
-                      <div className="col-md-3 ps-5">
-
-                        <h6 className="mb-0">Upload image</h6>
-
-                      </div>
-                      <div className="col-md-9 pe-5">
-
-                        <input className="form-control form-control-lg" name="image" id="formFileLg" type="file" onChange={handleChange} value={inputs.image} />
-                        <div className="small text-muted mt-2">Upload the image. Max file size 50 MB</div>
-
-                      </div>
-                    </div> */}
                     <div className="row align-items-center py-3">
                       <div className="col-md-3 ps-5">
                         <h6 className="mb-0">Upload image</h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <input className="form-control form-control-lg" name="image" onChange={handleChange} value={inputs.image}></input>
+                        <input className="form-control form-control-lg" name="image" onChange={convertToB64} type="file"></input>
                       </div>
                     </div>
                     <hr className="mx-n3"></hr>

@@ -14,6 +14,10 @@ const BlogSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    place: {
+        type: String,
+        required: true,
+    },
     date: {
         type: Date,
         minLength: 10,

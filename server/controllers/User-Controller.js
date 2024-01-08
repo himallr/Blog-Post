@@ -27,7 +27,7 @@ export const addUserDetails = async (req, res, next) => {
     const new_pass = bcrypt.hashSync(password);
     let users;
     try {
-        users = new User({ name, email, password: new_pass,blogs:[] });
+        users = new User({ name, email, password: new_pass, blogs: [] });
         users = users.save();
     }
     catch (e) {
@@ -64,7 +64,7 @@ export const login = async (req, res, next) => {
     if (isPasswordCorrect) {
         return res.status(200).json({ id: users._id });
     }
-    return res.status(500).json({ message: "Invalid Data" });
+    return res.status(500).json({ message: "Invalid Password" });
 }
 
 export const deleteUserDetails = async (req, res, next) => {
