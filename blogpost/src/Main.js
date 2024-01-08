@@ -46,7 +46,7 @@ const Main = () => {
     };
 
     console.log(blog);
-    
+
     return (
         <Box width={"100%"} height={"100%"} margin={"auto"} marginTop={2}>
             <Box width={"auto"} padding={5}>
@@ -59,12 +59,7 @@ const Main = () => {
 
                             <Box margin={"auto"} width={"100%"} flexWrap={"wrap"} style={{ justifyContent: "center" }}>
                                 {
-<<<<<<< HEAD
                                     blog && blog.blogs && blog.blogs.map((e, index) =>
-=======
-                                    blog && 
-                                    blog.blogs && blog.blogs.map((e, index) =>
->>>>>>> origin/main
                                         <Blogs id={e._id} key={index} isUser={localStorage.getItem("UserID") === e.user._id} title={e.title} description={e.description} date={e.date} image={e.image} user={e.user.name} />
                                     )
                                 }
