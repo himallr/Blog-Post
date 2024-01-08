@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true;
 
 export const sendUsers = async (datas, signup) => {
     console.log(signup);
-    const res = await axios.post(`http://localhost:3001/user/${!signup ? "addUser" : "login"}`, {
+    const res = await axios.post(`https://blog-post-steel.vercel.app/user/${!signup ? "addUser" : "login"}`, {
         name: !signup ? datas.name : "",
         email: datas.email,
         password: datas.password
@@ -23,7 +23,7 @@ export const sendUsers = async (datas, signup) => {
 }
 
 export const addBlogs = async (datas, user) => {
-    const res = await axios.post("http://localhost:3001/blog/addblogs", {
+    const res = await axios.post("https://blog-post-steel.vercel.app/blog/addblogs", {
         title: datas.title,
         description: datas.description,
         place: datas.place,
@@ -41,7 +41,7 @@ export const addBlogs = async (datas, user) => {
 };
 
 export const getBlogs = async () => {
-    const res = await axios.get("http://localhost:3001/blog/get")
+    const res = await axios.get("https://blog-post-steel.vercel.app/blog/get")
         .catch((e) => console.log(e))
 
     if (res.status !== 200) {
@@ -53,7 +53,7 @@ export const getBlogs = async () => {
 }
 
 export const getPagination = async (p) => {
-    const res = await axios.get(`http://localhost:3001/blog/getbyPagination?p=${p}`)
+    const res = await axios.get(`https://blog-post-steel.vercel.app/blog/getbyPagination?p=${p}`)
         .catch((e) => console.log(e))
 
     if (res.status !== 200) {
@@ -66,7 +66,7 @@ export const getPagination = async (p) => {
 
 export const getblogsById = async (id) => {
     const res = await axios
-        .get(`http://localhost:3001/blog/getbyid/${id}`)
+        .get(`https://blog-post-steel.vercel.app/blog/getbyid/${id}`)
         .catch((err) => console.log(err));
     const resData = await res.data;
     console.log(resData);
@@ -74,7 +74,7 @@ export const getblogsById = async (id) => {
 };
 
 export const deleteBlogs = async (id) => {
-    const res = await axios.delete(`http://localhost:3001/blog/deleteBlogs/${id}`)
+    const res = await axios.delete(`https://blog-post-steel.vercel.app/blog/deleteBlogs/${id}`)
         .catch((e) => console.log(e))
 
     if (res.status !== 200) {
@@ -86,7 +86,7 @@ export const deleteBlogs = async (id) => {
 
 export const updateBlogs = async (datas, id) => {
     console.log(id);
-    const res = await axios.put(`http://localhost:3001/blog/updateBlogs/${id}`, {
+    const res = await axios.put(`https://blog-post-steel.vercel.app/blog/updateBlogs/${id}`, {
         title: datas.title,
         description: datas.description,
         place: datas.place,
@@ -103,7 +103,7 @@ export const updateBlogs = async (datas, id) => {
 
 export const sendRequest = async (id) => {
     const res = await axios
-        .get(`http://localhost:3001/blog/getUserBlog/${id}`)
+        .get(`https://blog-post-steel.vercel.app/blog/getUserBlog/${id}`)
         .catch((err) => console.log(err));
 
     console.log(res.data);
