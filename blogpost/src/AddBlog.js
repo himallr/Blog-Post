@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addBlogs } from "./ApiHelpers";
 
-//const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const AddBlog = () => {
   const navigate = useNavigate();
   const user = localStorage.getItem("UserID");

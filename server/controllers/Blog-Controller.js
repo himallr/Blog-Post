@@ -69,6 +69,7 @@ export const updateBlog = async (req, res, next) => {
     catch (e) {
         console.log(e);
     }
+    console.log(blogs);
 
     if (blogs) {
         return res.status(200).json({ blogs });

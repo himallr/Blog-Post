@@ -10,7 +10,10 @@ const UpdateBlogs = () => {
     const [blog, setBlog] = useState({
         title: "",
         description: "",
+<<<<<<< HEAD
         place: "",
+=======
+>>>>>>> origin/main
         image: '',
     });
     const id = useParams().id;
@@ -31,26 +34,44 @@ const UpdateBlogs = () => {
     console.log(blog);
 
     const handleChange = (e) => {
+<<<<<<< HEAD
         setBlog((prevblog) => (
             {
                 ...prevblog,
                 [e.target.name]: e.target.value,
             }));
+=======
+        setBlog({
+            ...blog,
+            [e.target.name]: e.target.value,
+        });
+>>>>>>> origin/main
     };
 
     const convertToB64 = (e) => {
         const file = e.target.files[0];
+<<<<<<< HEAD
 
         if (file) {
             var reader = new FileReader();
 
+=======
+    
+        if (file) {
+            var reader = new FileReader();
+    
+>>>>>>> origin/main
             reader.onload = () => {
                 setBlog((prevInputs) => ({
                     ...prevInputs,
                     image: reader.result,
                 }));
             };
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/main
             reader.readAsDataURL(file);
         }
     };
@@ -87,6 +108,7 @@ const UpdateBlogs = () => {
                                             </div>
                                             <div className="col-md-9 pe-5">
                                                 <input type="text" name="description" className="form-control form-control-lg" value={blog.description} onChange={handleChange} />
+<<<<<<< HEAD
                                             </div>
                                         </div>
                                         <div className="row align-items-center py-3">
@@ -95,6 +117,8 @@ const UpdateBlogs = () => {
                                             </div>
                                             <div className="col-md-9 pe-5">
                                                 <input type="text" name="place" className="form-control form-control-lg" value={blog.place} onChange={handleChange} />
+=======
+>>>>>>> origin/main
                                             </div>
                                         </div>
                                         <div className="row align-items-center py-3">
