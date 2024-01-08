@@ -20,8 +20,8 @@ app.get("/", (req,res)=>{
     res.json("Hello!");
 })
 
-app.use("/user", userRoute);
 app.use("/blog", BlogRouter);
+app.use("/user", userRoute);
 
 mongoose.connect('mongodb+srv://himallr2003:51pXlgpE4q9oZhIc@cluster0.tdcr3z4.mongodb.net/test?retryWrites=true&w=majority')
     .then(() => {
