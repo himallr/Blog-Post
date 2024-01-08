@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://lblog-post-frontend-psi.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }));
