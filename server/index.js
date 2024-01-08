@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.get("/", (req,res)=>{
     res.json("Hello!");
-})
+});
 
 app.use("/blog", BlogRouter);
 app.use("/user", userRoute);
